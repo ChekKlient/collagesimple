@@ -3,6 +3,7 @@ var url = require('url');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});;
 
+
 function processRequest(request, response) {
     "use strict";
 
