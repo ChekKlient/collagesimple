@@ -1,0 +1,8 @@
+{
+  "name": "Node.js collage generator",
+  "description": "Make collage from twitter avatars",
+  "repository": "https://github.com/ChekKlient/collagesimple",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
