@@ -1,7 +1,7 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-var gd = require('node-gd');
+var gm = require('gm').subClass({imageMagick: true});;
 
 function processRequest(request, response) {
     "use strict";
@@ -29,11 +29,17 @@ function processRequest(request, response) {
 
     response.writeHead(200, { 'Content-Type': 'image/png' });
     //var img = fs.readFileSync(ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]));
-    var img = ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]);
+/*    var img = ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]);
     var fileName = 'output.png';
     var img = fs.readFileSync(fileName);
-
-    response.end(img, 'binary');
+*/
+    var imgBuf = fs.readFileSync('output.png');
+    var img = gm(525, 110, "#00ff55aa").toBuffer('PNG',function (err, buffer) {
+  if (err) return handle(err);
+    response.end(buffer, 'binary');
+    console.log('done!');  
+});
+//    response.end(img, 'binary');
     }
 }
 
@@ -44,6 +50,7 @@ http.createServer(processRequest).listen(8888);
 
 function GeneratePicture(CollageWidth, CollageHeight, xCoordinates, yCoordinates, pictureSides, pictureFiles)
 {
+  
   var img = gd.createSync(CollageWidth, CollageHeight);
   var fileName = 'output.png';
   img.colorAllocate(0, 0, 0);
