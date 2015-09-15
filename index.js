@@ -44,7 +44,7 @@ function processRequest(request, response) {
     }
 }
 
-http.createServer(processRequest).listen(8888);
+http.createServer(processRequest).listen(8880);
 //ComposeCollageSimple(800, 600, [1,2,3,3,4,5]);
 
 
