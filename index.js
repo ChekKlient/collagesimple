@@ -1,6 +1,7 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var gd = require('node-gd');
 
 function processRequest(request, response) {
     "use strict";
@@ -27,7 +28,11 @@ function processRequest(request, response) {
    {
 
     response.writeHead(200, { 'Content-Type': 'image/png' });
-    var img = fs.readFileSync(ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]));
+    //var img = fs.readFileSync(ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]));
+    var img = ComposeCollageSimple(parseInt(query.sizex), parseInt(query.sizey), [1,2,3,3,4,5]);
+    var fileName = 'output.png';
+    var img = fs.readFileSync(fileName);
+
     response.end(img, 'binary');
     }
 }
@@ -39,7 +44,6 @@ http.createServer(processRequest).listen(8888);
 
 function GeneratePicture(CollageWidth, CollageHeight, xCoordinates, yCoordinates, pictureSides, pictureFiles)
 {
-  var gd = require('node-gd');
   var img = gd.createSync(CollageWidth, CollageHeight);
   var fileName = 'output.png';
   img.colorAllocate(0, 0, 0);
@@ -56,6 +60,7 @@ function GeneratePicture(CollageWidth, CollageHeight, xCoordinates, yCoordinates
      console.log(1);
      avatar.copyResampled(img, xCoordinates[i], yCoordinates[i], 0,0,pictureSides[i], pictureSides[i], pictureSides[i], pictureSides[i]);
     }
+    avatar.destroy();
   }
   img.savePng(fileName, 1, function(err) {
   if(err) {
