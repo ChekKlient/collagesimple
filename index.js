@@ -17,4 +17,4 @@ function processRequest(request, response) {
     response.end();
 }
 
-http.createServer(processRequest).listen(443);
+http.createServer(processRequest).listen(8888);
