@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-"postinstall": "sudo apt-get install libgd2-xpm-dev # libgd"
+"postinstall": "apt-get install libgd2-xpm-dev # libgd"
   },
   "dependencies": {
     "ejs": "2.3.3",
